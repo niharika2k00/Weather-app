@@ -1,0 +1,23 @@
+// npx create-react-app my-app --template cra-template-pwa ------> for REACT 
+
+{  
+  "icons": [   
+    {
+      "src": "logos/flake_pink192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logos/flake_pink512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "name": "AccuWeather ",  //appname
+  "short_name": "AccuWeather ",
+  "theme_color": "#dae5ee",
+  "background_color": "#e5ecf1",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/"
+}
