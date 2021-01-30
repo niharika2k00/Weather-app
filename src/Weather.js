@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { fetchWeather } from './Api/fetchWeather';
-import './Weather.css';
+import './Weather.scss';
 import Hat from "./hatred.svg";
 
 function Weather() {
@@ -34,10 +34,8 @@ function Weather() {
   // navigator.geolocation.getCurrentPosition(success, console.log);
 
   useEffect(() => {
-    // console.log("use EFFECT");  
     navigator.geolocation.getCurrentPosition(success, error);
   }, []);
-
 
 
   var change = document.getElementsByTagName("body")[0];
@@ -51,28 +49,65 @@ function Weather() {
     }
 
     else {
-      console.log("pooohh");
       // console.log("LENGTH: " + weather.weather.length)
-      if (weather.weather[0].main === 'Clouds') {
-        change.style.backgroundImage = "url('./Pics/snow.jpg')";
-        document.getElementsByTagName('body')[0].style.background = "url('./Pics/snow.jpg')";
-        // change.style.backgroundColor = "red";
+      // if (window.matchMedia("(max-width: 360px)").matches) {
+      var width = window.innerWidth;
+      if (width > 370) {
+
+        if (weather.weather[0].main === 'Clouds') {
+          change.style.backgroundImage = "url('./Pics/clouds.jpg')";
+          console.log(window.innerWidth)
+        }
+
+        else if (weather.weather[0].main === 'Snow')
+          document.getElementsByTagName('body')[0].style.backgroundImage = "url('./Pics/snow.jpg')";
+
+        else if (weather.weather[0].main === 'Clear') {
+          // document.body.style.backgroundColor = "#f7797d";
+          document.body.style.backgroundImage = "url('./Pics/clear.jpg')";
+        }
+
+        else if (weather.weather[0].main === 'Haze')
+          change.style.backgroundImage = "url('./Pics/haze.jpg')";
+
+        else if (weather.weather[0].main === 'Rain')
+          change.style.backgroundImage = "url('./Pics/rain.jpg')";
+
+        else if (weather.weather[0].main === 'Thunderstorm')
+          change.style.backgroundImage = "url('./Pics/thunderstorm.jpg')";
+
+        else if (weather.weather[0].main === 'Fog')
+          change.style.backgroundImage = "url('./Pics/fog.jpg')";
       }
-      /*  else if (weather.weather[0].main === 'Snow') {
-         document.getElementsByTagName('body')[0].style.backgroundImage = "url('./Pics/haze.jpg')";
-         // change.style.backgroundColor = "pink";
-       } */
-      else if (weather.weather[0].main === 'Clear') {
-        // document.body.style.backgroundColor = "#f7797d";
-        document.body.style.backgroundImage = "url('snow.jpg')";
-        // document.querySelector('body').style.background = "url('./Pics/clear.jpg')";
+
+      else {
+        if (weather.weather[0].main === 'Clouds') {
+          change.style.backgroundColor = "yellow";
+          console.log("LESS tn 360 --> ", window.innerWidth)
+        }
+
+
       }
     }
-
   }, [weather]);
 
 
 
+
+
+  /*   var x = window.matchMedia("(max-width: 360px)")
+    console.log(x);
+    useEffect(() => {
+  
+      function myFunction(x) {
+        if (x.matches)
+          document.body.style.backgroundColor = "yellow";
+        else
+          document.body.style.backgroundColor = "pink";
+      }
+      myFunction(x);   
+    }, [x])
+   */
 
 
 
@@ -86,13 +121,15 @@ function Weather() {
         </div>
 
         <div className="app-main container">
-          <div className="searchInputBox">
+
+          {/* console.log(e.target.value)  */}
+          <label >
             <input type="text"
-              className="input-box"
-              placeholder="Enter city ...."
+              placeholder="Search city"
               value={val}
-              onChange={(e) => /* console.log(e.target.value) */ setval(e.target.value)} onKeyPress={search} />
-          </div>
+              onChange={(e) => setval(e.target.value)} onKeyPress={search} />
+          </label>
+
 
           {/* if weather is true(means NOT NULL) tn only it will execute */}
           {weather.main && (
@@ -112,6 +149,11 @@ function Weather() {
                 <div className="min-max" >
                   {Math.floor(weather.main.temp_min)}<sup>&deg;C</sup>(min)/
                   {Math.ceil(weather.main.temp_max)}<sup>&deg;C</sup> (max)
+                </div>
+
+                <div>
+                  <span className='press' ><b>Pressure : </b> {weather.main.pressure} Pa</span>
+                  <span className='humid'  ><b>Humidity : </b> {weather.main.humidity}%</span>
                 </div>
 
                 <div className="weather" >{weather.weather[0].description}</div>
@@ -150,21 +192,3 @@ export default Weather;
 
 
 
-/* if (weather.weather[0].description == 'Clear') {
-  body.style.backgroundImage = "url('')";
-
-} else if (weather.weather[0].description == 'Clouds') {
-
-
-} else if (weather.weather[0].description == 'Haze') {
-
-
-} else if (weather.weather[0].description == 'Rain') {
-
-
-} else if (weather.weather[0].description == 'Snow') {
-
-
-} else if (weather.weather[0].description == 'Thunderstorm') {
-
-}  */
