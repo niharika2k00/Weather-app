@@ -41,26 +41,21 @@ function Weather() {
   var change = document.getElementsByTagName("body")[0];
   useEffect(() => {
     console.log(weather);
-    // console.log(weather !== 'undefined' ? 'weather is null or undefined' : "LENGTH: " + weather.weather.length);
+    // console.log(weather !== 'undefined'?'weather is null or undefined' : "LENGTH: " + weather.weather.length);
 
-    if (Object.keys(weather).length === 0) {
+    if (Object.keys(weather).length === 0) {    // <---- object length
       console.log("hello");
       return;
     }
-
     else {
-      // console.log("LENGTH: " + weather.weather.length)
-      // if (window.matchMedia("(max-width: 360px)").matches) {
       var width = window.innerWidth;
-      if (width > 370) {
 
-        if (weather.weather[0].main === 'Clouds') {
-          change.style.backgroundImage = "url('./Pics/clouds.jpg')";
-          console.log(window.innerWidth)
-        }
+      if (width > 370) {     // <----- Responsive for VIEWPORT
+        if (weather.weather[0].main === 'Clouds')
+          change.style.backgroundImage = "url('./Pics/cloud.gif')";
 
-        else if (weather.weather[0].main === 'Snow')
-          document.getElementsByTagName('body')[0].style.backgroundImage = "url('./Pics/snow.jpg')";
+        else if (weather.main.temp < (-10) || weather.weather[0].main === 'Snow')
+          document.getElementsByTagName('body')[0].style.backgroundImage = "url('./Pics/snow2.gif')";
 
         else if (weather.weather[0].main === 'Clear') {
           // document.body.style.backgroundColor = "#f7797d";
@@ -68,34 +63,47 @@ function Weather() {
         }
 
         else if (weather.weather[0].main === 'Haze')
-          change.style.backgroundImage = "url('./Pics/haze.jpg')";
+          change.style.backgroundImage = "url('./Pics/fog.jpg')";
 
-        else if (weather.weather[0].main === 'Rain')
+        else if (weather.weather[0].main === 'Rain' || weather.weather[0].main === 'Fog')
           change.style.backgroundImage = "url('./Pics/rain.jpg')";
 
         else if (weather.weather[0].main === 'Thunderstorm')
           change.style.backgroundImage = "url('./Pics/thunderstorm.jpg')";
 
-        else if (weather.weather[0].main === 'Fog')
-          change.style.backgroundImage = "url('./Pics/fog.jpg')";
+        console.log(window.innerWidth);
       }
 
       else {
-        if (weather.weather[0].main === 'Clouds') {
-          change.style.backgroundColor = "yellow";
-          console.log("LESS tn 360 --> ", window.innerWidth)
+        if (weather.weather[0].main === 'Haze' || weather.weather[0].main === 'Rain') {
+          change.style.backgroundImage = "url('./Pics/rain.jpg')";
+          // change.style.backgroundImage = 'none';
+          // change.style.backgroundColor = "yellow";
         }
 
+        if (weather.weather[0].main === 'Clouds')
+          change.style.backgroundImage = "url('./Pics/cloud2.gif')";
 
+        else if (weather.main.temp < (-8) || weather.weather[0].main === 'Snow')
+          document.getElementsByTagName('body')[0].style.backgroundImage = "url('./Pics/snow1.gif')";
+
+        else if (weather.weather[0].main === 'Clear')
+          document.body.style.backgroundImage = "url('./Pics/clear_mini.jpg')";
+
+        else if (weather.weather[0].main === 'Thunderstorm')
+          change.style.backgroundImage = "url('./Pics/thunder_mini.jpg')";
+
+        else if (weather.weather[0].main === 'Fog')
+          change.style.backgroundImage = "url('./Pics/fog1.jpg')";
+
+        console.log("LESS tn 360 --> ", window.innerWidth)
       }
     }
   }, [weather]);
 
-
-
-
-
-  /*   var x = window.matchMedia("(max-width: 360px)")
+  /*    <-------  FOR RESPONSIVE COVER PIC(not working)  ------------->
+  
+  var x = window.matchMedia("(max-width: 360px)")
     console.log(x);
     useEffect(() => {
   
@@ -108,10 +116,6 @@ function Weather() {
       myFunction(x);   
     }, [x])
    */
-
-
-
-
 
   return (
     <div >

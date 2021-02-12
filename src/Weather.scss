@@ -23,7 +23,7 @@ body {
       rgba(166, 207, 207, 0.13),
       rgba(168, 119, 119, 0.432)
     ),
-    url("./Pics/mountain.jpg");
+    url("./mountain.jpg");
   // background: linear-gradient(to right, #f7797d, #fbd786, #c6ffdd);
   color: #1d2025;
   height: 100vh;
@@ -114,7 +114,7 @@ input {
 .weather-body {
   /* display: none; */
   color: #1f1b1c;
-  padding: .8rem .8rem .1rem .8rem;
+  padding: 0.8rem 0.8rem 0.1rem 0.8rem;
   line-height: 2.5rem;
   border-radius: 10px;
   box-shadow: inset 2px 2px 5px #9499a8, inset -5px -5px 10px #fff;
@@ -191,9 +191,9 @@ input {
   .city {
     padding: 0.5rem auto 1rem auto;
   }
-label {
- margin-bottom: 2.5rem;
-}
+  label {
+    margin-bottom: 2.5rem;
+  }
   .weather-body {
     margin: 0.8rem;
     height: 58vh;
